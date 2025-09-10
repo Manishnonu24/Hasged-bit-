@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Toggle Paragraph Example</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #333;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        #useless-paragraph {
+            max-width: 500px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 1rem;
+            line-height: 1.5;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        /* Hidden state with smooth fade */
+        .hidden {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ff6b6b;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>I am a headline made with HTML</h1>
+
+    <p id="useless-paragraph">✨ This is a "useless" paragraph, but you can choose to hide or show it. Try clicking the
+        button below!</p>
+
+    <button id="toggle-btn" onclick="toggleVisibility()">Hide Paragraph</button>
+
+    <script>
+        function toggleVisibility() {
+            const para = document.getElementById("useless-paragraph");
+            const button = document.getElementById("toggle-btn");
+
+            // Toggle the hidden class
+            para.classList.toggle("hidden");
+
+            // Update button text
+            if (para.classList.contains("hidden")) {
+                button.textContent = "Show Paragraph";
+            } else {
+                button.textContent = "Hide Paragraph";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

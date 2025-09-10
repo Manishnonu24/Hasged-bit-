@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Div Creator</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-align: center;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #container {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px dashed rgba(255, 255, 255, 0.4);
+            border-radius: 12px;
+            min-height: 250px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            width: 80%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .button {
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background: #ff6b6b;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .generated-div {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .generated-div:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>✨ Dynamic Div Creator ✨</h1>
+
+    <div>
+        <button class="button" onclick="createDiv(200, 100, 'Hello World!')">Add Div 1</button>
+        <button class="button" onclick="createDiv(150, 150, 'Second Div')">Add Div 2</button>
+        <button class="button" onclick="createDiv(120, 80, 'Third Div')">Add Div 3</button>
+    </div>
+
+    <div id="container"></div>
+
+    <script>
+        function createDiv(width, height, text) {
+            const container = document.getElementById("container");
+
+            const newDiv = document.createElement("div");
+            newDiv.classList.add("generated-div");
+
+            // Apply size
+            newDiv.style.width = width + "px";
+            newDiv.style.height = height + "px";
+
+            // Add text
+            newDiv.textContent = text;
+
+            container.appendChild(newDiv);
+        }
+    </script>
+</body>
+
+</html>

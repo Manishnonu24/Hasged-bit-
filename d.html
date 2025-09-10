@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Modern Text Styler</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            padding: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        #text-container {
+            margin: 20px 0;
+            padding: 20px 30px;
+            font-size: 55px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .controls {
+            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        input[type="text"],
+        select,
+        input[type="range"] {
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: none;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input[type="range"] {
+            width: 200px;
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #ff6b6b;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #ff4757;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .stylebt {
+            background: #4facfe;
+        }
+
+        .stylebt:hover {
+            background: #3b8bd9;
+        }
+
+        .active {
+            background: #20c997 !important;
+        }
+
+        #css-props {
+            margin-top: 20px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>✨ Modern Text Styler</h1>
+
+    <div id='text-container'>This is some example text</div>
+
+    <div class="controls">
+        <!-- Color Controls -->
+        <div>
+            <input type="text" id="colorbox" placeholder="Enter color name e.g. red">
+            <button id="colorchange" class="btn">Change Colour</button>
+        </div>
+
+        <!-- Font Size -->
+        <div>
+            <label for="fontsize">Font Size:</label><br>
+            <input type="range" id="fontsize" min="10" max="100" value="55">
+        </div>
+
+        <!-- Style Buttons -->
+        <div>
+            <button id="italic" class="stylebt">Italics</button>
+            <button id="underline" class="stylebt">Underline</button>
+            <button id="bold" class="stylebt">Bold</button>
+        </div>
+
+        <!-- Font Family -->
+        <div>
+            <label for="list">Font Family:</label><br>
+            <select id="list">
+                <option value="serif">Serif</option>
+                <option value="sans-serif">Sans-Serif</option>
+                <option value="monospace">Monospace</option>
+                <option value="cursive">Cursive</option>
+                <option value="fantasy">Fantasy</option>
+            </select>
+        </div>
+
+        <!-- Get CSS -->
+        <button id="getstyle" class="btn">Get CSS</button>
+    </div>
+
+    <p id="css-props"></p>
+
+    <script>
+        const textContainer = document.getElementById("text-container");
+        const colorBox = document.getElementById("colorbox");
+        const fontSizeSlider = document.getElementById("fontsize");
+        const cssProps = document.getElementById("css-props");
+
+        // Change color
+        document.getElementById("colorchange").addEventListener("click", () => {
+            textContainer.style.color = colorBox.value || "white";
+        });
+
+        // Change font size
+        fontSizeSlider.addEventListener("input", () => {
+            textContainer.style.fontSize = fontSizeSlider.value + "px";
+        });
+
+        // Toggle style buttons
+        function toggleStyle(id, styleProp, value) {
+            const btn = document.getElementById(id);
+            btn.addEventListener("click", () => {
+                if (textContainer.style[styleProp] === value) {
+                    textContainer.style[styleProp] = "";
+                    btn.classList.remove("active");
+                } else {
+                    textContainer.style[styleProp] = value;
+                    btn.classList.add("active");
+                }
+            });
+        }
+
+        toggleStyle("italic", "fontStyle", "italic");
+        toggleStyle("underline", "textDecoration", "underline");
+        toggleStyle("bold", "fontWeight", "bold");
+
+        // Font family
+        document.getElementById("list").addEventListener("change", (e) => {
+            textContainer.style.fontFamily = e.target.value;
+        });
+
+        // Get CSS
+        document.getElementById("getstyle").addEventListener("click", () => {
+            let styles = "";
+
+            if (textContainer.style.color) styles += `color: ${textContainer.style.color}; `;
+            if (textContainer.style.fontSize) styles += `font-size: ${textContainer.style.fontSize}; `;
+            if (textContainer.style.fontStyle === "italic") styles += `font-style: italic; `;
+            if (textContainer.style.textDecoration === "underline") styles += `text-decoration: underline; `;
+            if (textContainer.style.fontWeight === "bold") styles += `font-weight: bold; `;
+            if (textContainer.style.fontFamily) styles += `font-family: ${textContainer.style.fontFamily}; `;
+
+            cssProps.textContent = styles.trim();
+        });
+    </script>
+</body>
+
+</html>

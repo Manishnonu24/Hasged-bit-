@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Theme Toggle</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Container */
+        #app {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: background 0.6s ease, color 0.6s ease;
+        }
+
+        /* Day Theme */
+        .day {
+            background: linear-gradient(135deg, #fdfbfb, #ebedee);
+            color: #222;
+        }
+
+        /* Night Theme */
+        .night {
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #f9f9f9;
+        }
+
+        p {
+            font-size: 20px;
+            max-width: 500px;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+
+        /* Toggle Button */
+        .toggle-btn {
+            margin-top: 30px;
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            background: #4a90e2;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+        }
+
+        .toggle-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .day .toggle-btn {
+            background: #f39c12;
+        }
+
+        .night .toggle-btn {
+            background: #3498db;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Main Div -->
+    <div id="app" class="day">
+        <p>I am a HashedBit student, ready to become an awesome full stack developer</p>
+        <button id="swap" class="toggle-btn" onclick="swapTheme()">🌙</button>
+    </div>
+
+    <script>
+        function swapTheme() {
+            let app = document.getElementById("app");
+            let button = document.getElementById("swap");
+
+            if (app.classList.contains("day")) {
+                app.classList.remove("day");
+                app.classList.add("night");
+                button.textContent = "🌞"; // change to sun
+            } else {
+                app.classList.remove("night");
+                app.classList.add("day");
+                button.textContent = "🌙"; // change to moon
+            }
+        }
+    </script>
+</body>
+
+</html>
